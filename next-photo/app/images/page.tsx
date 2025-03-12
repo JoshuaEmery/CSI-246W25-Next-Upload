@@ -7,6 +7,7 @@ export default async function Images() {
     return blobs;
   }
   const images = await allImages();
+  console.log(images);
 
   return (
     <section>

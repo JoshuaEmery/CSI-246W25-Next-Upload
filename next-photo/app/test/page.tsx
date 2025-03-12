@@ -8,8 +8,12 @@ export default function TestPage() {
     const blob = await put(imageFile.name, imageFile, {
       access: "public",
     });
+    //As soon as this await
+    console.log(`The image url is ${blob.url}`);
     revalidatePath("/");
-    console.log(blob);
+    //once I have the url
+    //If I needed to I could create a new mongoose model and save it
+    //save the blob.url inside of your mongoose model - mov
     return;
   }
 
@@ -19,7 +23,13 @@ export default function TestPage() {
       <div>
         <form action={uploadImage}>
           <label htmlFor="image">Image</label>
-          <input type="file" id="image" name="image" required />
+          <input
+            type="file"
+            id="image"
+            name="image"
+            accept="image/*"
+            required
+          />
           <button type="submit">Upload</button>
         </form>
       </div>
