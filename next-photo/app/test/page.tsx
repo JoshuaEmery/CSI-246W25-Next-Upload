@@ -2,15 +2,6 @@ import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 
 export default function TestPage() {
-  return (
-    <div>
-      <h1>Upload an Image</h1>
-      <Form />
-    </div>
-  );
-}
-
-export function Form() {
   async function uploadImage(formData: FormData) {
     "use server";
     const imageFile = formData.get("image") as File;
@@ -18,14 +9,20 @@ export function Form() {
       access: "public",
     });
     revalidatePath("/");
+    console.log(blob);
     return;
   }
 
   return (
-    <form action={uploadImage}>
-      <label htmlFor="image">Image</label>
-      <input type="file" id="image" name="image" required />
-      <button type="submit">Upload</button>
-    </form>
+    <div>
+      <h1>Upload an Image</h1>
+      <div>
+        <form action={uploadImage}>
+          <label htmlFor="image">Image</label>
+          <input type="file" id="image" name="image" required />
+          <button type="submit">Upload</button>
+        </form>
+      </div>
+    </div>
   );
 }
